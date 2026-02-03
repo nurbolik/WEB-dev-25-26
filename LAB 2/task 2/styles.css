@@ -1,0 +1,138 @@
+body {
+    background: #fff;
+    font-family: -apple-system, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+}
+
+/* ЛЕВАЯ СТОРОНА */
+.left-side {
+    flex: 1.2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-left-logo {
+    width: 60px;
+    align-self: flex-start; /* Логотип в самом верху слева */
+    margin-bottom: 20px;
+}
+
+.hero-content {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hero-content h1 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.hero-content span {
+    color: #ff3040; /* Цвет "близкие друзья" */
+}
+
+.phones-img {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* ПРАВАЯ СТОРОНА */
+.right-side {
+    flex: 1;
+    border-left: 1px solid #dbdbdb; /* Тонкая линия разделения */
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.auth-content {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+}
+
+.login-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form input {
+    padding: 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 12px;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+.btn-login-blue {
+    background: #adcfff; /* Цвет кнопки как на фото */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.forgot-link {
+    text-align: center;
+    color: #00376b;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 20px 0;
+}
+
+/* Кнопки-рамки (Facebook и Аккаунт) */
+.btn-outline {
+    background: white;
+    border: 1px solid #0095f6;
+    color: #0095f6;
+    padding: 10px;
+    border-radius: 25px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.meta-container {
+    margin-top: auto;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.meta-container img {
+    width: 70px;
+    opacity: 0.7;
+}
+
+/* Адаптивность */
+@media (max-width: 800px) {
+    .left-side { display: none; }
+    .right-side { border-left: none; }
+}

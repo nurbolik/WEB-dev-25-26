@@ -1,0 +1,152 @@
+:root {
+    --white: #ffffff;
+    --gray-light: #f6f8fa;
+    --gray-border: #d0d7de;
+    --dark: #1f2328;
+    --blue: #0969da;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--dark);
+    line-height: 1.5;
+    margin: 0;
+    background-color: var(--white);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.hero-desc {
+    max-width: 700px;
+    margin: 0 auto 32px;
+    font-size: 18px;
+    color: #636c76;
+}
+
+/* Pricing Cards */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.card {
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.card.featured {
+    border: 2px solid var(--blue);
+    transform: scale(1.02);
+}
+
+.badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--blue);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 24px 0;
+}
+
+.price .currency { font-size: 18px; vertical-align: top; }
+.price .period { font-size: 14px; color: #636c76; font-weight: normal; }
+
+/* Buttons */
+button {
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid var(--gray-border);
+    transition: 0.2s;
+}
+
+.btn-primary { background: var(--dark); color: white; width: auto; padding: 12px 32px; }
+.btn-outline { background: var(--white); color: var(--blue); border-color: var(--gray-border); }
+.btn-dark { background: var(--dark); color: white; }
+
+/* Features List */
+.features {
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+    font-size: 14px;
+}
+
+.features li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #57ab5a;
+}
+
+/* Add-ons Grid */
+.addons {
+    margin-top: 80px;
+    padding-bottom: 80px;
+}
+
+.section-title {
+    font-size: 14px;
+    color: var(--blue);
+    margin-bottom: 24px;
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.addon-card {
+    border: 1px solid var(--gray-border);
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .card.featured { transform: none; margin: 20px 0; }
+}
