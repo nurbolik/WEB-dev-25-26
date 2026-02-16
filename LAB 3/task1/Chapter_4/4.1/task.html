@@ -1,0 +1,106 @@
+Привет, объект
+важность: 5
+Напишите код, по одной строке на каждое действие:
+
+Создайте пустой объект user.
+Добавьте свойство name со значением John.
+Добавьте свойство surname со значением Smith.
+Измените значение name на Pete.
+Удалите свойство name из объекта.
+решение
+let user = {};
+user.name = "John";
+user.surname = "Smith";
+user.name = "Pete";
+delete user.name;
+
+Проверьте, нет ли пустоты
+важность: 5
+Напишите функцию isEmpty(obj), которая возвращает true, если у объекта нет свойств, и false в противном случае.
+
+Должно работать примерно так:
+
+let schedule = {};
+
+alert( isEmpty(schedule) ); // true
+
+schedule["8:30"] = "get up";
+
+alert( isEmpty(schedule) ); // false
+Откройте песочницу с тестами.
+
+решение
+Просто переберите все свойства объекта и return false сразу же, если в нем есть хотя бы одно свойство.
+
+function isEmpty(obj) {
+  for (let key in obj) {
+    // if the loop has started, there is a property
+    return false;
+  }
+  return true;
+}
+Откройте решение с тестами в песочнице.
+
+
+Суммировать свойства объекта
+важность: 5
+У нас есть объект, в котором хранятся зарплаты нашей команды:
+
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+Напишите код, который суммирует все зарплаты и сохраняет результат в переменной sum. В приведенном выше примере должно получиться 390 .
+
+Если salaries пусто, то результатом должно быть 0.
+
+решение
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+};
+
+let sum = 0;
+for (let key in salaries) {
+  sum += salaries[key];
+}
+
+alert(sum); // 390
+
+Умножьте числовые значения свойств на 2
+важность: 3
+Создайте функцию multiplyNumeric(obj), которая умножает все числовые значения свойств obj на 2.
+
+Например:
+
+// before the call
+let menu = {
+  width: 200,
+  height: 300,
+  title: "My menu"
+};
+
+multiplyNumeric(menu);
+
+// after the call
+menu = {
+  width: 400,
+  height: 600,
+  title: "My menu"
+};
+Обратите внимание, что multiplyNumeric не должен ничего возвращать. Он должен изменять объект на месте.
+
+P.S. Используйте typeof для проверки числа.
+
+Откройте песочницу с тестами.
+
+решение
+function multiplyNumeric(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] == 'number') {
+      obj[key] *= 2;
+    }
+  }
+}

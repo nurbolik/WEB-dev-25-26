@@ -1,0 +1,62 @@
+Что не так с этим тестом?
+важность: 5
+Что не так с тестом pow ниже?
+
+it("Raises x to the power n", function() {
+  let x = 5;
+
+  let result = x;
+  assert.equal(pow(x, 1), result);
+
+  result *= x;
+  assert.equal(pow(x, 2), result);
+
+  result *= x;
+  assert.equal(pow(x, 3), result);
+});
+P.S. С точки зрения синтаксиса тест правильный и проходит проверку.
+
+решение
+Этот тест демонстрирует одно из искушений, с которыми сталкивается разработчик при написании тестов.
+
+На самом деле здесь три теста, но они объединены в одну функцию с тремя утверждениями.
+
+Иногда так писать проще, но в случае возникновения ошибки становится гораздо менее очевидно, что пошло не так.
+
+Если ошибка возникает в середине сложного процесса выполнения, нам придется разбираться с данными в этом месте. Нам придется отлаживать тест.
+
+Было бы гораздо лучше разбить тест на несколько it блоков с четко прописанными входными и выходными данными.
+
+Вот так:
+
+describe("Raises x to power n", function() {
+  it("5 in the power of 1 equals 5", function() {
+    assert.equal(pow(5, 1), 5);
+  });
+
+  it("5 in the power of 2 equals 25", function() {
+    assert.equal(pow(5, 2), 25);
+  });
+
+  it("5 in the power of 3 equals 125", function() {
+    assert.equal(pow(5, 3), 125);
+  });
+});
+Мы заменили одиночный it на describe и группу блоков it . Теперь, если что-то пойдет не так, мы будем четко видеть, какие данные использовались.
+
+Кроме того, мы можем изолировать отдельный тест и запустить его в автономном режиме, написав it.only вместо it:
+
+describe("Raises x to power n", function() {
+  it("5 in the power of 1 equals 5", function() {
+    assert.equal(pow(5, 1), 5);
+  });
+
+  // Mocha will run only this block
+  it.only("5 in the power of 2 equals 25", function() {
+    assert.equal(pow(5, 2), 25);
+  });
+
+  it("5 in the power of 3 equals 125", function() {
+    assert.equal(pow(5, 3), 125);
+  });
+});

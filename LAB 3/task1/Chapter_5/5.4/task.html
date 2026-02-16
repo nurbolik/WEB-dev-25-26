@@ -1,0 +1,108 @@
+Скопирован ли массив?
+важность: 3
+Что показывает этот код?
+
+let fruits = ["Apples", "Pear", "Orange"];
+
+// push a new value into the "copy"
+let shoppingCart = fruits;
+shoppingCart.push("Banana");
+
+// what's in fruits?
+alert( fruits.length ); // ?
+решение
+В результате получается 4:
+
+let fruits = ["Apples", "Pear", "Orange"];
+
+let shoppingCart = fruits;
+
+shoppingCart.push("Banana");
+
+alert( fruits.length ); // 4
+Это потому, что массивы — это объекты. Таким образом, shoppingCart и fruits являются ссылками на один и тот же массив.
+
+
+Операции с массивами.
+важность: 5
+Давайте попробуем выполнить 5 операций с массивами.
+
+Создайте массив styles с элементами «Джаз» и «Блюз».
+Добавьте в конец «Рок-н-ролл».
+Замените значение в середине на «Классику». Ваш код для поиска среднего значения должен работать для любых массивов с нечётной длиной.
+Удалите первое значение из массива и выведите его.
+Добавьте в начало массива Rap и Reggae.
+Массив в процессе:
+
+Jazz, Blues
+Jazz, Blues, Rock-n-Roll
+Jazz, Classics, Rock-n-Roll
+Classics, Rock-n-Roll
+Rap, Reggae, Classics, Rock-n-Roll
+решение
+let styles = ["Jazz", "Blues"];
+styles.push("Rock-n-Roll");
+styles[Math.floor((styles.length - 1) / 2)] = "Classics";
+alert( styles.shift() );
+styles.unshift("Rap", "Reggae");
+
+Calling in an array context
+importance: 5
+What is the result? Why?
+
+let arr = ["a", "b"];
+
+arr.push(function() {
+  alert( this );
+});
+
+arr[2](); // ?
+solution
+The call arr[2]() is syntactically the good old obj[method](), in the role of obj we have arr, and in the role of method we have 2.
+
+So we have a call of the function arr[2] as an object method. Naturally, it receives this referencing the object arr and outputs the array:
+
+let arr = ["a", "b"];
+
+arr.push(function() {
+  alert( this );
+})
+
+arr[2](); // a,b,function(){...}
+The array has 3 values: initially it had two, plus the function.
+
+
+Sum input numbers
+importance: 4
+Write the function sumInput() that:
+
+Asks the user for values using prompt and stores the values in the array.
+Finishes asking when the user enters a non-numeric value, an empty string, or presses “Cancel”.
+Calculates and returns the sum of array items.
+P.S. A zero 0 is a valid number, please don’t stop the input on zero.
+
+Run the demo
+
+решение
+Пожалуйста, обратите внимание на небольшую, но важную деталь решения. Мы не преобразуем value в число сразу после prompt, потому что после value = +value мы не сможем отличить пустую строку (знак остановки) от нуля (действительного числа). Мы делаем это позже.
+
+function sumInput() {
+
+  let numbers = [];
+
+  while (true) {
+
+    let value = prompt("A number please?", 0);
+
+    // should we cancel?
+    if (value === "" || value === null || !isFinite(value)) break;
+
+    numbers.push(+value);
+  }
+
+  let sum = 0;
+  for (let number of numbers) {
+    sum += number;
+  }
+  return sum;
+}

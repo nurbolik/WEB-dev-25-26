@@ -1,0 +1,165 @@
+Использование this в объектном литерале
+важность: 5
+Здесь функция makeUser возвращает объект.
+
+Каков результат обращения к его ref? Почему?
+
+function makeUser() {
+  return {
+    name: "John",
+    ref: this
+  };
+}
+
+let user = makeUser();
+
+alert( user.ref.name ); // What's the result?
+решение
+Ответ: ошибка.
+
+Попробуйте еще раз:
+
+function makeUser() {
+  return {
+    name: "John",
+    ref: this
+  };
+}
+
+let user = makeUser();
+
+alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
+Это потому, что правила, задающие this, не учитывают определение объекта. Имеет значение только момент вызова.
+
+Здесь значение this внутри makeUser() равно undefined, потому что оно вызывается как функция, а не как метод с использованием точечной нотации.
+
+Значение this одинаково для всей функции, блоки кода и литералы объектов на него не влияют.
+
+Таким образом, ref: this фактически принимает текущее this значение функции.
+
+Мы можем переписать функцию и вернуть тот же this со значением undefined:
+
+function makeUser(){
+  return this; // this time there's no object literal
+}
+
+alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
+Как видите, результат alert( makeUser().name ) такой же, как результат alert( user.ref.name ) из предыдущего примера.
+
+А вот противоположный случай:
+
+function makeUser() {
+  return {
+    name: "John",
+    ref() {
+      return this;
+    }
+  };
+}
+
+let user = makeUser();
+
+alert( user.ref().name ); // John
+Теперь это работает, потому что user.ref() — это метод. И значение this присваивается объекту до точки ..
+
+
+Создайте калькулятор
+важность: 5
+Создайте объект calculator с тремя методами:
+
+read() запрашивает два значения и сохраняет их как свойства объекта с именами a и b соответственно.
+sum()возвращает сумму сохраненных значений.
+mul() перемножает сохраненные значения и возвращает результат.
+let calculator = {
+  // ... your code ...
+};
+
+calculator.read();
+alert( calculator.sum() );
+alert( calculator.mul() );
+Запустите демонстрационную версию
+
+Откройте песочницу с тестами.
+
+решение
+let calculator = {
+  sum() {
+    return this.a + this.b;
+  },
+
+  mul() {
+    return this.a * this.b;
+  },
+
+  read() {
+    this.a = +prompt('a?', 0);
+    this.b = +prompt('b?', 0);
+  }
+};
+
+calculator.read();
+alert( calculator.sum() );
+alert( calculator.mul() );
+Open the solution with tests in a sandbox.
+
+
+Сцепление
+важность: 2
+Есть объект ladder , который позволяет перемещаться вверх и вниз:
+
+let ladder = {
+  step: 0,
+  up() {
+    this.step++;
+  },
+  down() {
+    this.step--;
+  },
+  showStep: function() { // shows the current step
+    alert( this.step );
+  }
+};
+Теперь, если нам нужно выполнить несколько вызовов последовательно, мы можем сделать это так:
+
+ladder.up();
+ladder.up();
+ladder.down();
+ladder.showStep(); // 1
+ladder.down();
+ladder.showStep(); // 0
+Измените код up, down, и showStep, чтобы вызовы можно было объединять в цепочку, как показано ниже:
+
+ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+Такой подход широко используется в библиотеках JavaScript.
+
+Откройте песочницу с тестами.
+
+решение
+Решение состоит в том, чтобы при каждом вызове возвращать сам объект.
+
+let ladder = {
+  step: 0,
+  up() {
+    this.step++;
+    return this;
+  },
+  down() {
+    this.step--;
+    return this;
+  },
+  showStep() {
+    alert( this.step );
+    return this;
+  }
+};
+
+ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+Мы также можем писать по одному вызову в строке. Для длинных цепочек так удобнее:
+
+ladder
+  .up()
+  .up()
+  .down()
+  .showStep() // 1
+  .down()
+  .showStep(); // 0

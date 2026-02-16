@@ -1,0 +1,107 @@
+if (строка с нулем)
+важность: 5
+Будет ли alert показан?
+
+if ("0") {
+  alert( 'Hello' );
+}
+решение
+Да, так и будет.
+
+Любая строка, кроме пустой (а "0" не является пустой), в логическом контексте становится true
+
+Мы можем запустить и проверить:
+
+if ("0") {
+  alert( 'Hello' );
+}
+
+Название JavaScript
+важность: 2
+С помощью конструкции if..else напишите код, который спрашивает: «Каково “официальное” название JavaScript?»
+
+Если пользователь введет «ECMAScript», выведите «Верно!», в противном случае — «Вы не знаете? ECMAScript!»
+
+
+Демонстрация в новом окне
+
+решение
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    'use strict';
+
+    let value = prompt('What is the "official" name of JavaScript?', '');
+
+    if (value == 'ECMAScript') {
+      alert('Right!');
+    } else {
+      alert("You don't know? ECMAScript!");
+    }
+  </script>
+
+
+</body>
+
+</html>
+
+Покажи знак
+важность: 2
+С помощью if..else напишите код, который получает число через prompt и выводит его в alert:
+
+1, если значение больше нуля,
+-1, если меньше нуля,
+0, если равно нулю.
+В этой задаче мы предполагаем, что на вход всегда подается число.
+
+Демонстрация в новом окне
+
+решение
+let value = prompt('Type a number', 0);
+
+if (value > 0) {
+  alert( 1 );
+} else if (value < 0) {
+  alert( -1 );
+} else {
+  alert( 0 );
+}
+
+Замените 'if' на '?'
+важность: 5
+Перепишите это if с помощью условного оператора '?':
+
+let result;
+
+if (a + b < 4) {
+  result = 'Below';
+} else {
+  result = 'Over';
+}
+решение
+let result = (a + b < 4) ? 'Below' : 'Over';
+
+Замените 'if..else' на '?'
+важность: 5
+Перепишите if..else с использованием нескольких тернарных операторов '?'.
+
+Для удобства чтения рекомендуется разбить код на несколько строк.
+
+let message;
+
+if (login == 'Employee') {
+  message = 'Hello';
+} else if (login == 'Director') {
+  message = 'Greetings';
+} else if (login == '') {
+  message = 'No login';
+} else {
+  message = '';
+}
+решение
+let message = (login == 'Employee') ? 'Hello' :
+  (login == 'Director') ? 'Greetings' :
+  (login == '') ? 'No login' :
+  '';

@@ -1,0 +1,93 @@
+Первый символ в верхнем регистре
+важность: 5
+Напишите функцию ucFirst(str), которая возвращает строку str с первым символом в верхнем регистре, например:
+
+ucFirst("john") == "John";
+Откройте песочницу с тестами.
+
+решение
+Мы не можем «заменить» первый символ, потому что строки в JavaScript неизменяемы.
+
+Но мы можем создать новую строку на основе существующей, изменив первый символ на заглавную букву:
+
+let newStr = str[0].toUpperCase() + str.slice(1);
+Однако есть небольшая проблема. Если str пусто, то str[0] равно undefined, а поскольку у undefined нет метода toUpperCase(), мы получим ошибку.
+
+Самый простой способ — добавить проверку на пустую строку, например так:
+
+function ucFirst(str) {
+  if (!str) return str;
+
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+alert( ucFirst("john") ); // John
+Откройте решение с тестами в песочнице.
+
+
+Проверка на наличие спама
+важность: 5
+Напишите функцию checkSpam(str), которая возвращает true, если str содержит ‘viagra’ или ‘XXX’, в противном случае false.
+
+Функция не должна учитывать регистр:
+
+checkSpam('buy ViAgRA now') == true
+checkSpam('free xxxxx') == true
+checkSpam("innocent rabbit") == false
+Откройте песочницу с тестами.
+
+решение
+Чтобы поиск не зависел от регистра, переведем строку в нижний регистр, а затем выполним поиск:
+
+function checkSpam(str) {
+  let lowerStr = str.toLowerCase();
+
+  return lowerStr.includes('viagra') || lowerStr.includes('xxx');
+}
+
+alert( checkSpam('buy ViAgRA now') );
+alert( checkSpam('free xxxxx') );
+alert( checkSpam("innocent rabbit") );
+Откройте решение с тестами в песочнице.
+
+
+Обрезать текст
+важность: 5
+Создайте функцию truncate(str, maxlength) которая проверяет длину str и, если она превышает maxlength, заменяет конец str символом многоточия "…", чтобы его длина стала равна maxlength.
+
+Результатом работы функции должна быть усеченная (при необходимости) строка.
+
+Например:
+
+truncate("What I'd like to tell on this topic is:", 20) == "What I'd like to te…"
+
+truncate("Hi everyone!", 20) == "Hi everyone!"
+Откройте песочницу с тестами.
+
+решение
+Максимальная длина должна быть maxlength, поэтому нам нужно немного сократить текст, чтобы осталось место для многоточия.
+
+Обратите внимание, что для многоточия в Юникоде есть один символ. Это не три точки.
+
+function truncate(str, maxlength) {
+  return (str.length > maxlength) ?
+    str.slice(0, maxlength - 1) + '…' : str;
+}
+Откройте решение с тестами в песочнице.
+
+
+Извлеките деньги
+важность: 4
+У нас есть стоимость в формате "$120". То есть сначала идет знак доллара, а потом число.
+
+Создайте функцию extractCurrencyValue(str), которая будет извлекать числовое значение из такой строки и возвращать его.
+
+Пример:
+
+alert( extractCurrencyValue('$120') === 120 ); // true
+Откройте песочницу с тестами.
+
+решение
+function extractCurrencyValue(str) {
+  return +str.slice(1);
+}

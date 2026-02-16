@@ -1,0 +1,145 @@
+Фильтровать уникальные элементы массива
+важность: 5
+Пусть arr — это массив.
+
+Создайте функцию unique(arr), которая должна возвращать массив с уникальными элементами arr.
+
+Например:
+
+function unique(arr) {
+  /* your code */
+}
+
+let values = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+alert( unique(values) ); // Hare, Krishna, :-O
+P.S. Здесь используются строки, но это могут быть значения любого типа.
+
+P.P.S. Используйте Set для хранения уникальных значений.
+
+Откройте песочницу с тестами.
+
+решение
+function unique(arr) {
+  return Array.from(new Set(arr));
+}
+Откройте решение с тестами в песочнице.
+
+
+Фильтровать анаграммы
+важность: 4
+Анаграммы — это слова, состоящие из одинакового количества букв, но в разном порядке.
+
+Например:
+
+nap - pan
+ear - are - era
+cheaters - hectares - teachers
+Напишите функцию aclean(arr), которая возвращает массив, очищенный от анаграмм.
+
+Например:
+
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+alert( aclean(arr) ); // "nap,teachers,ear" or "PAN,cheaters,era"
+Из каждой группы анаграмм должно остаться только одно слово, какое именно — неважно.
+
+Откройте песочницу с тестами.
+
+решение
+Чтобы найти все анаграммы, давайте разобьем каждое слово на буквы и отсортируем их. После сортировки все анаграммы будут одинаковыми.
+
+Например:
+
+nap, pan -> anp
+ear, era, are -> aer
+cheaters, hectares, teachers -> aceehrst
+...
+Мы будем использовать варианты сортировки по буквам в качестве ключей для хранения только одного значения для каждого ключа:
+
+function aclean(arr) {
+  let map = new Map();
+
+  for (let word of arr) {
+    // split the word by letters, sort them and join back
+    let sorted = word.toLowerCase().split('').sort().join(''); // (*)
+    map.set(sorted, word);
+  }
+
+  return Array.from(map.values());
+}
+
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+alert( aclean(arr) );
+Сортировка писем осуществляется с помощью цепочки вызовов в строке (*).
+
+Для удобства давайте разделим ее на несколько строк:
+
+let sorted = word // PAN
+  .toLowerCase() // pan
+  .split('') // ['p','a','n']
+  .sort() // ['a','n','p']
+  .join(''); // anp
+Два разных слова 'PAN' и 'nap' принимают одинаковую форму с отсортированными буквами 'anp'.
+
+В следующей строке слово добавляется на карту:
+
+map.set(sorted, word);
+Если мы встретим слово в той же буквенной форме, оно перезапишет предыдущее значение с тем же ключом на карте. Таким образом, у нас всегда будет не более одного слова в каждой буквенной форме.
+
+В конце Array.from(map.values()) принимает итерируемый объект со значениями карты (ключи в результате нам не нужны) и возвращает их массив.
+
+Здесь мы могли бы использовать обычный объект вместо Map, потому что ключи — это строки.
+
+Вот как может выглядеть решение:
+
+function aclean(arr) {
+  let obj = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    let sorted = arr[i].toLowerCase().split("").sort().join("");
+    obj[sorted] = arr[i];
+  }
+
+  return Object.values(obj);
+}
+
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+alert( aclean(arr) );
+Откройте решение с тестами в песочнице.
+
+
+Повторяющиеся ключи
+важность: 5
+Мы хотели бы получить массив map.keys() в переменной, а затем применить к нему методы, предназначенные для работы с массивами, например .push.
+
+Но это не работает:
+
+let map = new Map();
+
+map.set("name", "John");
+
+let keys = map.keys();
+
+// Error: keys.push is not a function
+keys.push("more");
+Почему? Как исправить код, чтобы keys.push заработало?
+
+решение
+Это потому, что map.keys() возвращает итерируемый объект, а не массив.
+
+Мы можем преобразовать его в массив с помощью Array.from:
+
+let map = new Map();
+
+map.set("name", "John");
+
+let keys = Array.from(map.keys());
+
+keys.push("more");
+
+alert(keys); // name, more
